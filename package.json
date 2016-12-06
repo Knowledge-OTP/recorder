@@ -1,0 +1,28 @@
+{
+  "name": "recorder",
+  "version": "1.0.0",
+  "description": "recoreding mp3",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Knowledge-OTP/recorder.git"
+  },
+  "keywords": [
+    "recorder"
+  ],
+  "author": "https://github.com/Knowledge-OTP",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Knowledge-OTP/recorder/issues"
+  },
+  "homepage": "https://github.com/Knowledge-OTP/recorder#readme",
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "webpack": "^1.13.3"
+  },
+  "dependencies": {
+    "skylinkjs": "^0.6.15"
+  }
+}
