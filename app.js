@@ -1,3 +1,4 @@
 import core from './src/core';
 
-window.raccoonRecorder = core;
+module.exports = core;
+

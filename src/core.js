@@ -1,5 +1,5 @@
 const core = {
-    version: '1.0.0',
+    version: VERSION
 };
 
 export default core;

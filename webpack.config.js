@@ -5,7 +5,8 @@ module.exports = {
     output: {
         path: './dist',
         filename: 'main.js',
-        publicPath: "https://cdn.temasys.com.sg/skylink/skylinkjs/0.6.x/skylink.complete.min.js",
+        libraryTarget: 'var',
+        library: 'raccoonRecorder'
     },
     module: {
         loaders: [
@@ -28,5 +29,8 @@ module.exports = {
                 comments: false,
             },
         }),
+        new webpack.DefinePlugin({
+            VERSION: JSON.stringify(require("./package.json").version)
+        })
     ]
 }
