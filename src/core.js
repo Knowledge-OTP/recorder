@@ -9,14 +9,24 @@ MediaRecorder or AudioContext are not supported in this browser.`;
 
 window.AudioContext = (AudioContext || webkitAudioContext);
 
+const MEDIA_ENUM = {
+    MEDIA_RECORDER: 1,
+    AUDIO_CONTEXT: 2 
+};
+
 class Core {
-    constructor() {
+    constructor(options) {
         this._mediaWrapper;
         this._isPlaying = false;
+        this._options = options || {};
     }
 
-    static getVersion() {
+    static get VERSION() {
         return VERSION;
+    }
+
+    static get MEDIA_ENUM() {
+        return MEDIA_ENUM;
     }
 
     _getMediaWrapper(stream) {
