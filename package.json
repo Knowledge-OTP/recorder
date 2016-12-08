@@ -10,6 +10,9 @@
   "keywords": [
     "recorder"
   ],
+  "scripts": {
+    "test": "karma start"
+  },
   "author": "https://github.com/Knowledge-OTP",
   "license": "ISC",
   "bugs": {
@@ -20,6 +23,11 @@
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.8",
     "babel-preset-es2015": "^6.18.0",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-webpack": "^1.8.0",
     "webpack": "^1.13.3"
   },
   "dependencies": {
