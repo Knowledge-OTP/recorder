@@ -7,7 +7,7 @@
 */
 
 /**
- *  @param {function} successCallback 
+ *  @param {function} successCallback return stream
  *  @param {function} errorCallback
  *  @param {string} [appKey] Skylink appKey
  */
@@ -43,7 +43,7 @@ function getMicrophoneAccess(successCallback, errorCallback, appKey) {
         });
 
     } else {
-        console.error('mediaDevices.getUserMedia and getUserMedia not supported in this browser.');
+        errorCallback('mediaDevices.getUserMedia and getUserMedia not supported in this browser.');
     }
 }
 
