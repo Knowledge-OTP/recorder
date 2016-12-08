@@ -20,9 +20,7 @@ export default class MediaRecorderWrapper {
         this._mediaRecorder.onstop = (e) => {
             this._blob = new Blob(this._chunks, { 'type': 'audio/ogg; codecs=opus' });
 
-            if (util.isFunction(this.onMediaReady)) {
-                this.onMediaReady(this._blob);
-            }
+            util.invoke(this, 'onMediaReady', this._blob);             
         };
     }
 

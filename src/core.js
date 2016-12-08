@@ -4,23 +4,14 @@ import AudioContextWrapper from './audioContextWrapper.js';
 import handleError from './handleError.js'
 import util from './util.js';
 
-let mediaWrapperError = `mediaWrapper not defined! maybe because mediaDevices.getUserMedia and 
-getUserMedia and MediaRecorder or AudioContext are not supported in this browser.`;
-
-const mediaWrapperDefault = {
-    start: () => {
-        handleError('Core', 'mediaWrapper start', mediaWrapperError);
-    },
-    stop: () => {
-        handleError('Core', 'mediaWrapper stop', mediaWrapperError);
-    }
-};
+let mediaWrapperError = `mediaWrapper not defined! maybe because 
+MediaRecorder or AudioContext are not supported in this browser.`;
 
 window.AudioContext = (AudioContext || webkitAudioContext);
 
 class Core {
     constructor() {
-        this._mediaWrapper = mediaWrapperDefault;
+        this._mediaWrapper;
         this._isPlaying = false;
     }
 
@@ -33,9 +24,11 @@ class Core {
             return new MediaRecorderWrapper(stream);
         } else if (AudioContext) {
             return new AudioContextWrapper(stream);
+        } else {
+            handleError('Core', '_getMediaWrapper', mediaWrapperError);
         }
 
-        return mediaWrapperDefault;
+        return {};
     }
 
     play() {
@@ -45,17 +38,15 @@ class Core {
 
         MicrophoneAccess.getMicrophoneAccess(stream => {
             this._mediaWrapper = this._getMediaWrapper(stream);
-            this._mediaWrapper.start();
+
+            util.invoke(this._mediaWrapper, 'start');
+
             this._isPlaying = true;
 
-            if (util.isFunction(this.onPlay)) {
-                this.onPlay();
-            }
+            util.invoke(this, 'onPlay');            
 
             this._mediaWrapper.onMediaReady = (blob) => {
-                if (util.isFunction(this.onMediaReady)) {
-                    this.onMediaReady(blob);
-                }
+                util.invoke(this, 'onMediaReady', blob); 
             };
 
         },
@@ -71,9 +62,7 @@ class Core {
         this._mediaWrapper.stop();
         this._isPlaying = false;
 
-        if (util.isFunction(this.onStop)) {
-            this.onStop();
-        }
+        util.invoke(this, 'onStop');         
     }
 };
 
