@@ -60,7 +60,8 @@ class Core {
             };
 
         },
-            handleError.bind('MicrophoneAccess', `can't get access to microphone`)
+            handleError.bind('MicrophoneAccess', `can't get access to microphone`),
+            this.options.skylinkAppKey
         );
     }
 
