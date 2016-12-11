@@ -69,7 +69,8 @@ class Core {
             return;
         }
 
-        this._mediaWrapper.stop();
+        util.invoke(this._mediaWrapper, 'stop');         
+            
         this._isPlaying = false;
 
         util.invoke(this, 'onStop');         
