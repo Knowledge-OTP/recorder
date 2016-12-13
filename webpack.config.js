@@ -6,7 +6,7 @@ module.exports = {
         path: './dist',
         filename: 'main.js',
         libraryTarget: 'var',
-        library: 'raccoonRecorder'
+        library: 'RaccoonRecorder'
     },
     module: {
         loaders: [
