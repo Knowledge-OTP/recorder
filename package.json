@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "test": "karma start",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --watch-poll",
     "build": "webpack --config webpack.config.js"
   },
   "author": "https://github.com/Knowledge-OTP",
@@ -34,7 +34,5 @@
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2"
   },
-  "dependencies": {
-    "skylinkjs": "^0.6.15"
-  }
+  "dependencies": {}
 }

@@ -12,7 +12,7 @@
        margin-left: 10px;
     }
     
-    .audio {
+    .audio-conatiner div {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -32,15 +32,39 @@
     <button onclick="clickStop()">stop</button>
   </div>
 
-  <div class="audio"></div>
+  <div class="audio-conatiner"></div>
 
   <script src="http://cdn.temasys.com.sg/skylink/skylinkjs/0.6.x/skylink.complete.js"></script>
-  <script src="vendor/libmp3lame.min.js"></script>
+  <script src='vendor/lame.all.js'></script>
   <script src="dist/main.js"></script>
 
   <script>
+
+         function createAudioDiv(blob) {
+            var fragment = document.createDocumentFragment();
+            var audioContainer = document.querySelector('.audio-conatiner');  
+            var audioDiv = document.createElement('div');
+
+            var span = document.createElement('span');
+            span.textContent = blob.type || 'audio';
+
+            var audio = document.createElement('audio');
+            audio.setAttribute('controls', '');
+            audio.controls = true;
+            var audioURL = window.URL.createObjectURL(blob);
+            audio.src = audioURL;
+
+            audioDiv.appendChild(span);
+            audioDiv.appendChild(audio);
+
+            fragment.appendChild(audioDiv);
+
+            audioContainer.appendChild(fragment);
+         }
+         
          var r = new raccoonRecorder({
-             skylinkAppKey: 'f0d79c86-bfc9-48e0-81b7-cb132f55c287'
+             skylinkAppKey: 'f0d79c86-bfc9-48e0-81b7-cb132f55c287',
+             fixedMedia: raccoonRecorder.MEDIA_ENUM.audioContext
          });
 
          function clickPlay() {
@@ -62,16 +86,15 @@
          r.onMediaReady = function(blob) {
             console.log('blob', blob);
 
-            var audioDiv = document.querySelector('.audio');  
-            var audio = document.createElement('audio');
-            audio.setAttribute('controls', '');
-
-            audioDiv.appendChild(audio);
-            audio.controls = true;
-      
-            var audioURL = window.URL.createObjectURL(blob);
-            audio.src = audioURL;
+            createAudioDiv(blob);
          }
+
+         r.onMp3Ready = function(mp3Blob) {
+            console.log('mp3Blob', mp3Blob);
+
+            createAudioDiv(mp3Blob);
+         }
+
   </script>
 </body>
 

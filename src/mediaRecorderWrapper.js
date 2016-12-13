@@ -3,7 +3,7 @@ import util from './util.js';
 export default class MediaRecorderWrapper {
     constructor(stream) {
         this._stream = stream;
-        this._chunks = [];
+        this._samples = [];
         this._mediaRecorder;
         this._blob;
     }
@@ -14,13 +14,16 @@ export default class MediaRecorderWrapper {
         this._mediaRecorder.start();
 
         this._mediaRecorder.ondataavailable = (e) => {
-            this._chunks.push(e.data);
+            this._samples.push(e.data);
         };
 
         this._mediaRecorder.onstop = (e) => {
-            this._blob = new Blob(this._chunks, { 'type': 'audio/ogg; codecs=opus' });
+            this._blob = new Blob(this._samples, { 'type': 'audio/ogg; codecs=opus' });
 
-            util.invoke(this, 'onMediaReady', this._blob);             
+            util.invoke(this, 'onMediaReady', {
+                blob: this._blob,
+                samples: this._samples
+            });             
         };
     }
 

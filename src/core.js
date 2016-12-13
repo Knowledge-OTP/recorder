@@ -1,7 +1,8 @@
 import MicrophoneAccess from './microphoneAccess.js';
 import MediaRecorderWrapper from './mediaRecorderWrapper.js';
 import AudioContextWrapper from './audioContextWrapper.js';
-import handleError from './handleError.js'
+import Mp3Encoder from './mp3Encoder.js';
+import handleError from './handleError.js';
 import util from './util.js';
 
 let mediaWrapperError = `mediaWrapper not defined! maybe because 
@@ -10,8 +11,8 @@ MediaRecorder or AudioContext are not supported in this browser.`;
 window.AudioContext = (AudioContext || webkitAudioContext);
 
 const MEDIA_ENUM = {
-    MEDIA_RECORDER: 1,
-    AUDIO_CONTEXT: 2 
+    mediaRecorder: 1,
+    audioContext: 2
 };
 
 class Core {
@@ -30,9 +31,11 @@ class Core {
     }
 
     _getMediaWrapper(stream) {
-        if (MediaRecorder) {
+        if (MediaRecorder &&
+            (this._options.fixedMedia !== MEDIA_ENUM.audioContext)) {
             return new MediaRecorderWrapper(stream);
-        } else if (AudioContext) {
+        } else if (AudioContext &&
+            (this._options.fixedMedia !== MEDIA_ENUM.mediaRecorder)) {
             return new AudioContextWrapper(stream);
         } else {
             handleError('Core', '_getMediaWrapper', mediaWrapperError);
@@ -53,15 +56,20 @@ class Core {
 
             this._isPlaying = true;
 
-            util.invoke(this, 'onPlay');            
+            util.invoke(this, 'onPlay');
 
-            this._mediaWrapper.onMediaReady = (blob) => {
-                util.invoke(this, 'onMediaReady', blob); 
+            this._mediaWrapper.onMediaReady = ({ samples, blob }) => {
+                util.invoke(this, 'onMediaReady', blob);
+
+                if (util.isFunction(this.onMp3Ready)) {
+                    var mp3Encoder = Mp3Encoder(samples);
+                    this.onMp3Ready(mp3Encoder.blob);
+                }
             };
 
         },
             handleError.bind('MicrophoneAccess', `can't get access to microphone`),
-            this.options.skylinkAppKey
+            this._options.skylinkAppKey
         );
     }
 
@@ -70,12 +78,13 @@ class Core {
             return;
         }
 
-        util.invoke(this._mediaWrapper, 'stop');         
-            
+        util.invoke(this._mediaWrapper, 'stop');
+
         this._isPlaying = false;
 
-        util.invoke(this, 'onStop');         
+        util.invoke(this, 'onStop');
     }
 };
 
 export default Core;
+
