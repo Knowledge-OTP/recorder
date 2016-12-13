@@ -1,0 +1,15 @@
+{
+  "name": "recorder",
+  "description": "recoreding mp3",
+  "main": "./dist/main.js",
+  "authors": [
+    "https://github.com/Knowledge-OTP"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "recorder"
+  ],
+  "homepage": "https://github.com/Knowledge-OTP/recorder",
+  "moduleType": [],
+  "private": true
+}
