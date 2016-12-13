@@ -15,11 +15,17 @@ const MEDIA_ENUM = {
     audioContext: 2
 };
 
+const FORMAT_ENUM = {
+    mp3: 1,
+    wav: 2,
+    ogg: 3
+};
+
 class Core {
     constructor(options) {
         this._mediaWrapper;
         this._isPlaying = false;
-        this._options = options || {};
+        this._options = options || {}; 
     }
 
     static get VERSION() {
@@ -40,7 +46,7 @@ class Core {
         } else {
             handleError('Core', '_getMediaWrapper', mediaWrapperError);
         }
-
+ 
         return {};
     }
 
@@ -58,13 +64,8 @@ class Core {
 
             util.invoke(this, 'onPlay');
 
-            this._mediaWrapper.onMediaReady = ({ samples, blob }) => {
+            this._mediaWrapper.onMediaReady = ({ blob }) => {
                 util.invoke(this, 'onMediaReady', blob);
-
-                if (util.isFunction(this.onMp3Ready)) {
-                    var mp3Encoder = Mp3Encoder(samples);
-                    this.onMp3Ready(mp3Encoder.blob);
-                }
             };
 
         },

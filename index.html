@@ -35,8 +35,9 @@
   <div class="audio-conatiner"></div>
 
   <script src="http://cdn.temasys.com.sg/skylink/skylinkjs/0.6.x/skylink.complete.js"></script>
-  <script src='vendor/lame.all.js'></script>
+  <script id="mp3worker" src='vendor/mp3Worker.js' type="text/javascript"></script>
   <script src="dist/main.js"></script>
+
 
   <script>
 
@@ -87,12 +88,6 @@
             console.log('blob', blob);
 
             createAudioDiv(blob);
-         }
-
-         r.onMp3Ready = function(mp3Blob) {
-            console.log('mp3Blob', mp3Blob);
-
-            createAudioDiv(mp3Blob);
          }
 
   </script>

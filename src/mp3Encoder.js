@@ -1,30 +1,31 @@
-export default function Mp3Encoder(samples, options = {}) {
-    const channels = 2 || options.channels;
-    const sampleRate = 44100 || options.sampleRate;
-    const kbps = 128 || options.kbps;
+let workerScript = document.querySelector('#mp3worker').src;
+import util from './util.js';
 
-    var mp3encoder = new lamejs.Mp3Encoder(2, 44100, 128);
-    var mp3Data = [];
-
-    var left = new Int16Array(44100); 
-    var right = new Int16Array(44100); 
-    var sampleBlockSize = 1152;
-
-    for (var i = 0; i < samples.length; i += sampleBlockSize) {
-        var leftChunk = left.subarray(i, i + sampleBlockSize);
-        var rightChunk = right.subarray(i, i + sampleBlockSize);
-        var mp3buf = mp3encoder.encodeBuffer(leftChunk, rightChunk);
-        if (mp3buf.length > 0) {
-            mp3Data.push(mp3buf);
-        }
-    }
-    var mp3buf = mp3encoder.flush(); 
-
-    if (mp3buf.length > 0) {
-        mp3Data.push(mp3buf);
+export default class Mp3Encoder {
+    constructor({ context }) {
+        this._encodingWorker = new Worker(workerScript);
     }
 
-    const blob = new Blob(mp3Data, {type: 'audio/mp3'});
+    initialize() {
+        this._encodingWorker.postMessage({ cmd: 'init', config: { channels: 2, samplerate: 48000, bitrate: 32 } });
 
-     return { blob, mp3Data };
+        this._encodingWorker.onmessage = (e) => {
+            if (e.data.cmd === 'data' && util.isFunction(this.onMp3Data)) {
+                this.onMp3Data(e.data.buf);
+            }
+
+            if (e.data.cmd === 'end' && util.isFunction(this.onMp3End)) {
+                this.onMp3End(e.data.buf);
+            }
+        };
+    }
+
+    onProcess(left) {
+        this._encodingWorker.postMessage({ cmd: 'encode', buf: left });
+    }
+
+    finish() {
+        this._encodingWorker.postMessage({ cmd: 'finish' });
+    }
+
 }

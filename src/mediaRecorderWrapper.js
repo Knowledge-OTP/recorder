@@ -21,8 +21,7 @@ export default class MediaRecorderWrapper {
             this._blob = new Blob(this._samples, { 'type': 'audio/ogg; codecs=opus' });
 
             util.invoke(this, 'onMediaReady', {
-                blob: this._blob,
-                samples: this._samples
+                blob: this._blob
             });             
         };
     }

@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "test": "karma start",
-    "start": "webpack-dev-server --watch-poll",
+    "start": "webpack-dev-server --watch-poll --open",
     "build": "webpack --config webpack.config.js"
   },
   "author": "https://github.com/Knowledge-OTP",
