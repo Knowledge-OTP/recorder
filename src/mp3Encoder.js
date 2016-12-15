@@ -2,7 +2,7 @@ import util from './util.js';
 
 export default class Mp3Encoder {
     constructor({ context }) {
-        let workerScript = document.querySelector('#mp3worker').src;
+        let workerScript = document.querySelector('#mp3Worker').src;
         this._encodingWorker = new Worker(workerScript);
     }
 

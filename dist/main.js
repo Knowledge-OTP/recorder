@@ -489,7 +489,7 @@ var RaccoonRecorder =
 
 	        _classCallCheck(this, Mp3Encoder);
 
-	        var workerScript = document.querySelector('#mp3worker').src;
+	        var workerScript = document.querySelector('#mp3Worker').src;
 	        this._encodingWorker = new Worker(workerScript);
 	    }
 
