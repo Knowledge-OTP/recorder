@@ -97,7 +97,7 @@ var RaccoonRecorder =
 
 	var mediaWrapperError = 'mediaWrapper not defined! maybe because \nMediaRecorder or AudioContext are not supported in this browser.';
 
-	window.AudioContext = AudioContext || webkitAudioContext;
+	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 	var MEDIA_ENUM = {
 	    mediaRecorder: 1,
