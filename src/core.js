@@ -8,7 +8,7 @@ import util from './util.js';
 let mediaWrapperError = `mediaWrapper not defined! maybe because 
 MediaRecorder or AudioContext are not supported in this browser.`;
 
-window.AudioContext = (AudioContext || webkitAudioContext);
+window.AudioContext = (window.AudioContext || window.webkitAudioContext);
 
 const MEDIA_ENUM = {
     mediaRecorder: 1,
