@@ -122,9 +122,9 @@ var RaccoonRecorder =
 	    _createClass(Core, [{
 	        key: '_getMediaWrapper',
 	        value: function _getMediaWrapper(stream) {
-	            if (MediaRecorder && this._options.fixedMedia !== MEDIA_ENUM.audioContext) {
+	            if (window.MediaRecorder && this._options.fixedMedia !== MEDIA_ENUM.audioContext) {
 	                return new _mediaRecorderWrapper2.default(stream);
-	            } else if (AudioContext && this._options.fixedMedia !== MEDIA_ENUM.mediaRecorder) {
+	            } else if (window.AudioContext && this._options.fixedMedia !== MEDIA_ENUM.mediaRecorder) {
 	                return new _audioContextWrapper2.default(stream);
 	            } else {
 	                (0, _handleError2.default)('Core', '_getMediaWrapper', mediaWrapperError);
@@ -284,7 +284,7 @@ var RaccoonRecorder =
 	        value: function start() {
 	            var _this = this;
 
-	            this._mediaRecorder = new MediaRecorder(this._stream);
+	            this._mediaRecorder = new window.MediaRecorder(this._stream);
 
 	            this._mediaRecorder.start();
 

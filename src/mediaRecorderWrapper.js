@@ -9,7 +9,7 @@ export default class MediaRecorderWrapper {
     }
 
     start() {
-        this._mediaRecorder = new MediaRecorder(this._stream);
+        this._mediaRecorder = new window.MediaRecorder(this._stream);
 
         this._mediaRecorder.start();
 

@@ -37,10 +37,10 @@ class Core {
     }
 
     _getMediaWrapper(stream) {
-        if (MediaRecorder &&
+        if (window.MediaRecorder &&
             (this._options.fixedMedia !== MEDIA_ENUM.audioContext)) {
             return new MediaRecorderWrapper(stream);
-        } else if (AudioContext &&
+        } else if (window.AudioContext &&
             (this._options.fixedMedia !== MEDIA_ENUM.mediaRecorder)) {
             return new AudioContextWrapper(stream);
         } else {
