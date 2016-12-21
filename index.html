@@ -72,6 +72,14 @@
             r.play();
          }
 
+         r.onPermissonAccess = function() {
+             console.log('on permissonAccess');  
+         };
+
+         r.onPermissonDenied = function() {
+            console.log('on permissonDenied');  
+         };
+
          r.onPlay = function() {
              console.log('on play');  
          };
