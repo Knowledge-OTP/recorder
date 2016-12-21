@@ -72,7 +72,8 @@ class Core {
 
         }, err => {
             util.invoke(this, 'onPermissonDenied');
-            handleError.bind('Core', 'Play {MicrophoneAccess}', err);
+            
+            handleError('Core', 'Play {MicrophoneAccess}', err);
         },
            this._options.skylinkAppKey
         );
