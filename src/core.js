@@ -56,6 +56,8 @@ class Core {
         }
 
         MicrophoneAccess.getMicrophoneAccess(stream => {
+            util.invoke(this, 'onPermissonAccess');
+
             this._mediaWrapper = this._getMediaWrapper(stream);
 
             util.invoke(this._mediaWrapper, 'start');
@@ -68,9 +70,11 @@ class Core {
                 util.invoke(this, 'onMediaReady', blob);
             };
 
+        }, err => {
+            util.invoke(this, 'onPermissonDenied');
+            handleError.bind('Core', 'Play {MicrophoneAccess}', err);
         },
-            handleError.bind('MicrophoneAccess', `can't get access to microphone`),
-            this._options.skylinkAppKey
+           this._options.skylinkAppKey
         );
     }
 
