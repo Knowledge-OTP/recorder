@@ -218,16 +218,17 @@ var RaccoonRecorder =
 	 *  @param {string} [appKey] Skylink appKey
 	 */
 	function getMicrophoneAccess(successCallback, errorCallback, appKey) {
-	    if (!navigator.getUserMedia) {
-	        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+	    /* if (!navigator.getUserMedia) {
+	        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
+	            navigator.mozGetUserMedia || navigator.msGetUserMedia;
 	    }
-
-	    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-	        navigator.mediaDevices.getUserMedia({ audio: true }).then(successCallback).catch(errorCallback);
-	    } else if (navigator.getUserMedia) {
-
-	        navigator.getUserMedia({ audio: true }, successCallback, errorCallback);
-	    } else if (Skylink) {
+	      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+	        navigator.mediaDevices.getUserMedia({ audio: true })
+	            .then(successCallback)
+	            .catch(errorCallback);
+	      } else if (navigator.getUserMedia) {
+	          navigator.getUserMedia({ audio: true }, successCallback, errorCallback);
+	      } else */if (Skylink) {
 	        (function () {
 
 	            var skylink = new Skylink();
