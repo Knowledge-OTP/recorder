@@ -12,12 +12,19 @@
  *  @param {string} [appKey] Skylink appKey
  */
 function getMicrophoneAccess(successCallback, errorCallback, appKey) {
-    /* if (!navigator.getUserMedia) {
+    if (!navigator.getUserMedia) {
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
             navigator.mozGetUserMedia || navigator.msGetUserMedia;
     }
 
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    if (Skylink) {
+
+        AdapterJS.webRTCReady(function (isUsingPlugin) {
+            navigator.getUserMedia({ audio: true }, successCallback, errorCallback);
+        });
+
+    } else if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(successCallback)
             .catch(errorCallback);
@@ -26,7 +33,7 @@ function getMicrophoneAccess(successCallback, errorCallback, appKey) {
 
         navigator.getUserMedia({ audio: true }, successCallback, errorCallback);
 
-    } else */ if (Skylink) {
+    } /* else if (Skylink) {
 
         const skylink = new Skylink();
 
@@ -42,13 +49,13 @@ function getMicrophoneAccess(successCallback, errorCallback, appKey) {
             });
         });
 
-    } else {
+    } */ else {
         errorCallback('mediaDevices.getUserMedia and getUserMedia not supported in this browser.');
     }
 }
 
 const MicrophoneAccess = {
-     getMicrophoneAccess
+    getMicrophoneAccess
 };
 
 export default MicrophoneAccess;
