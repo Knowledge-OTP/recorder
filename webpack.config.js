@@ -1,10 +1,13 @@
 const webpack = require('webpack');
 
 module.exports = {
-    entry: './app.js',
+    entry: {
+       main: './app.js',
+      'main.min': './app.js'
+    },
     output: {
         path: './dist',
-        filename: 'main.js',
+        filename: '[name].js',
         libraryTarget: 'var',
         library: 'RaccoonRecorder'
     },
@@ -28,6 +31,8 @@ module.exports = {
             output: {
                 comments: false,
             },
+            include: /\.min\.js$/,
+            minimize: true
         }),
         new webpack.DefinePlugin({
             VERSION: JSON.stringify(require("./package.json").version)
