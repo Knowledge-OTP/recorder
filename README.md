@@ -17,12 +17,14 @@
    Constructor: 
    
 ```javascript
-    // options   
+    /* options:
+    
     skylinkAppKey(optional),
        
     fixedMedia(required): if not provided, uses the MediaRecorder api for newer browsers, 
                           and AudioContext api for older ones. 
                           (IMPORTENT!: only support AudioContext at the moment, so always use it)
+    */                      
       
     // initialize recorder 
     var r = new RaccoonRecorder({
