@@ -16,6 +16,7 @@
    
    Constructor: 
    
+```javascript
     // options   
     skylinkAppKey(optional),
        
@@ -28,7 +29,7 @@
           skylinkAppKey: '',
           fixedMedia: RaccoonRecorder.MEDIA_ENUM.audioContext
     });
-      
+```  
          
    Methods:
    
@@ -97,6 +98,8 @@
    run build 
   
     npm run build
+    
+### Things to do    
     
 
 
