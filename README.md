@@ -108,8 +108,10 @@
   
     npm run build
     
-### Things to do - (in various importance) 
+### Things to do for future versions - (in various importance) 
 
+* add support for Skilnk - webrtc plugin for safari and older ie 
+ 
 * Metohds: add a pause method
 
 * LifeCycle: if implaments the pasue method, add a on pause event
