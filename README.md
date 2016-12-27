@@ -16,22 +16,26 @@
    
    Constructor: 
    
-    // options   
+```javascript
+    /* options:
+    
     skylinkAppKey(optional),
        
     fixedMedia(required): if not provided, uses the MediaRecorder api for newer browsers, 
                           and AudioContext api for older ones. 
                           (IMPORTENT!: only support AudioContext at the moment, so always use it)
+    */                      
       
     // initialize recorder 
     var r = new RaccoonRecorder({
           skylinkAppKey: '',
           fixedMedia: RaccoonRecorder.MEDIA_ENUM.audioContext
     });
-      
+```  
          
    Methods:
-   
+
+```javascript
     // start record
     // (maybe should be changed to start or record?)
     
@@ -40,8 +44,11 @@
     // stop record
     
     r.stop();
-    
+```
+
   Static Methods:
+  
+```javascript
   
     // get the current version
      
@@ -50,8 +57,11 @@
     // get available media wrappers 
      
     RaccoonRecorder.MEDIA_ENUM // ie: { mediaRecorder: 1, audioContext: 2 }
-     
+```
+
   LifeCycle Events:
+  
+```javascript
   
     //  on permisson access - user enable audio media
     
@@ -82,7 +92,7 @@
     r.onMediaReady = function(blob) {
         console.log('blob', blob);
     }  
-  
+```  
  
 ## DEVELOPMENT
 
@@ -97,6 +107,25 @@
    run build 
   
     npm run build
+    
+### Things to do - (in various importance) 
+
+* Metohds: add a pause method
+
+* LifeCycle: if implaments the pasue method, add a on pause event
+
+* LifeCycle: add an on progress event
+
+* add export in ogg and wav also, now support only mp3
+
+* enable inline worker instead of require throuh script
+
+* add comments to code
+
+* add tests 
+
+* try to improve recording, now only encode left channel 
+
     
 
 
