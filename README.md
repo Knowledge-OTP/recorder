@@ -53,6 +53,10 @@
     // get available media wrappers 
      
     RaccoonRecorder.MEDIA_ENUM // ie: { mediaRecorder: 1, audioContext: 2 }
+
+    // get the getMicrophoneAccess(successCallback, errorCallback) 
+     
+    RaccoonRecorder.getMicrophoneAccess // ie: returns an object of success or error 
 ```
 
   LifeCycle Events:
@@ -74,7 +78,7 @@
     //  on start record 
 
     r.onStart = function() {
-        console.log('on play');  
+        console.log('on start');  
     };
 
     //  on stop record

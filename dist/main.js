@@ -179,12 +179,17 @@ var RaccoonRecorder =
 	    }], [{
 	        key: 'VERSION',
 	        get: function get() {
-	            return ("1.0.0");
+	            return ("1.0.1");
 	        }
 	    }, {
 	        key: 'MEDIA_ENUM',
 	        get: function get() {
 	            return MEDIA_ENUM;
+	        }
+	    }, {
+	        key: 'getMicrophoneAccess',
+	        get: function get() {
+	            return _microphoneAccess2.default.getMicrophoneAccess;
 	        }
 	    }]);
 

@@ -36,6 +36,10 @@ class Core {
         return MEDIA_ENUM;
     }
 
+    static get getMicrophoneAccess() {
+        return MicrophoneAccess.getMicrophoneAccess;
+    }
+
     _getMediaWrapper(stream) {
         if (window.MediaRecorder &&
             (this._options.fixedMedia !== MEDIA_ENUM.audioContext)) {

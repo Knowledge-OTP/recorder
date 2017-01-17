@@ -30,6 +30,7 @@
   <div class="buttons">
     <button onclick="clickStart()">start</button>
     <button onclick="clickStop()">stop</button>
+    <button onclick="cheackPermissions()">cheack permissions</button>
   </div>
 
   <div class="audio-conatiner"></div>
@@ -94,6 +95,14 @@
             console.log('blob', blob);
 
             createAudioDiv(blob);
+         }
+
+         function cheackPermissions() {
+             RaccoonRecorder.getMicrophoneAccess(function (data) {
+                 console.log('getMicrophoneAccess data:', data);
+             }, function(err) {
+                 console.log('getMicrophoneAccess err:', err);
+             });
          }
 
   </script>
