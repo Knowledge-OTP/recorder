@@ -50,7 +50,7 @@ class Core {
         return {};
     }
 
-    play() {
+    start() {
         if (this._isPlaying) {
             return;
         }
@@ -64,7 +64,7 @@ class Core {
 
             this._isPlaying = true;
 
-            util.invoke(this, 'onPlay');
+            util.invoke(this, 'onStart');
 
             this._mediaWrapper.onMediaReady = ({ blob }) => {
                 util.invoke(this, 'onMediaReady', blob);
@@ -74,9 +74,7 @@ class Core {
             util.invoke(this, 'onPermissonDenied');
             
             handleError('Core', 'Play {MicrophoneAccess}', err);
-        },
-           this._options.skylinkAppKey
-        );
+        });
     }
 
     stop() {

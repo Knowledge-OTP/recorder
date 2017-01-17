@@ -18,8 +18,6 @@
    
 ```javascript
     /* options:
-    
-    skylinkAppKey(optional),
        
     fixedMedia(required): if not provided, uses the MediaRecorder api for newer browsers, 
                           and AudioContext api for older ones. 
@@ -28,7 +26,6 @@
       
     // initialize recorder 
     var r = new RaccoonRecorder({
-          skylinkAppKey: '',
           fixedMedia: RaccoonRecorder.MEDIA_ENUM.audioContext
     });
 ```  
@@ -37,9 +34,8 @@
 
 ```javascript
     // start record
-    // (maybe should be changed to start or record?)
     
-    r.play();
+    r.start();
     
     // stop record
     
@@ -77,7 +73,7 @@
     
     //  on start record 
 
-    r.onPlay = function() {
+    r.onStart = function() {
         console.log('on play');  
     };
 
@@ -110,8 +106,6 @@
     
 ### Things to do for future versions - (in various importance) 
 
-* add support for Skilnk - webrtc plugin for safari and older ie 
- 
 * Metohds: add a pause method
 
 * LifeCycle: if implaments the pasue method, add a on pause event
